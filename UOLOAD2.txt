@@ -6,3 +6,6 @@ texto adicional
 copiando mas con tenido
 
 cerrando
+
+
+prueba externa
