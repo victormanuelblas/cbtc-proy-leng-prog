@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="#">Cibertec - LP1</a>
+    <a class="navbar-brand" href="#">PROYECTO - LP1</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,10 +10,10 @@
           <a class="nav-link" href="inicio">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="curso">Almacén</a>
+          <a class="nav-link" href="producto">Almacén</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="usuario">Nosotros</a>
+          <a class="nav-link" href="#">Nosotros</a>
         </li>
       </ul>
     </div>
