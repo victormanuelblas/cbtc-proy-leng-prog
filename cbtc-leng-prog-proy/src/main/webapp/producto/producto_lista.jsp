@@ -50,6 +50,8 @@
 							<td>
 								<a href="producto?opcion=editar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil"></i></a>
 								<a href="producto?opcion=eliminar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-danger" ><i class="bi bi-trash3"></i></a>
+								<a href="producto?opcion=eliminar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-success" ><i class="bi bi-arrow-left-right"></i></a>
+								<a href="producto?opcion=eliminar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-info" ><i class="bi bi-card-list"></i></a>
 							</td>
 						</tr>
 						<% 
