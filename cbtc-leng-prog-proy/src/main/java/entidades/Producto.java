@@ -1,9 +1,8 @@
 package entidades;
 
-import java.util.Date;
-
 public class Producto {
 	private int productoId;
+	private String codigo;
 	private String nombre;
 	private int categoriaId;
 	private String categoria;
@@ -16,10 +15,11 @@ public class Producto {
 	private String estado;
 	
 	
-	public Producto(int productoId, String nombre, int categoriaId, String categoria, Double precio, String fechaCreacion,
+	public Producto(int productoId, String codigo, String nombre, int categoriaId, String categoria, Double precio, String fechaCreacion,
 			int stock, int stockMax, int stockMin, int estadoId, String estado) {
 		super();
 		this.productoId = productoId;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.categoriaId = categoriaId;
 		this.categoria = categoria;
@@ -32,10 +32,11 @@ public class Producto {
 		this.estado = estado;
 	}
 
-	public Producto(String nombre, int categoriaId, String categoria, Double precio, String fechaCreacion,
+	public Producto(String codigo, String nombre, int categoriaId, String categoria, Double precio, String fechaCreacion,
 			int stock, int stockMax, int stockMin, int estadoId, String estado) {
 		super();
 		this.productoId = 0;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.categoriaId = categoriaId;
 		this.categoria = categoria;
@@ -48,10 +49,11 @@ public class Producto {
 		this.estado = estado;
 	}
 
-	public Producto(String nombre, int categoriaId, Double precio, String fechaCreacion,
+	public Producto(String codigo, String nombre, int categoriaId, Double precio, String fechaCreacion,
 			int stock, int stockMax, int stockMin, int estadoId) {
 		super();
 		this.productoId = 0;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.categoriaId = categoriaId;
 		this.precio = precio;
@@ -62,10 +64,11 @@ public class Producto {
 		this.estadoId = estadoId;
 	}
 	
-	public Producto(int productoId, String nombre, String categoria, Double precio, String fechaCreacion,
+	public Producto(int productoId, String codigo, String nombre, String categoria, Double precio, String fechaCreacion,
 			int stock, int stockMax, int stockMin, String estado) {
 		super();
 		this.productoId = productoId;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.categoria = categoria;
 		this.precio = precio;
@@ -77,7 +80,7 @@ public class Producto {
 	}
 
 	public Producto() {
-		this(0, "",0, "", 0.0, "" , 0, 0 , 0 , 1, "");
+		this(0,"", "",0, "", 0.0, "" , 0, 0 , 0 , 1, "");
 	}
 
 
@@ -87,6 +90,14 @@ public class Producto {
 
 	public void setProductoId(int productoId) {
 		this.productoId = productoId;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNombre() {

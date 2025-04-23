@@ -9,5 +9,5 @@ public interface ProductoInterface {
 	public Producto obtener(int productoId);
 	public int actualizar(Producto producto);
 	public int eliminar(int productoId);
-
+	public ArrayList<Producto> buscar(String nomProducto);
 }

@@ -16,12 +16,27 @@
 	<div class="container">
 		<h2>Almacén - Productos</h2>
 		
-		<a href="usuario?opcion=editar" class="btn btn-sm btn-outline-success"><i class="bi bi-plus-circle-fill"></i> Nuevo</a>
+		<div class="row">
+			<div class="col" >
+				<a href="producto?opcion=detalle" class="btn btn-sm btn-outline-success"><i class="bi bi-plus-circle-fill"></i> Nuevo</a>
+			</div>
+			<div style="width: 200px" >
+				<% 
+					String texto = "";
+					if(request.getParameter("texto") != null) texto = request.getParameter("texto"); 
+				%>
+				<form id="formBuscar" action="producto" method="get">
+					<input type="text" id="texto" name="texto" placeHolder="Buscar" value="<%= texto %>" />
+				</form>			
+			</div>	
+		</div>
+		
 		<div class="row">
 			<div class="table-responsive">
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
+							<th>Código</th>
 							<th>Nombre</th>
 							<th>Categoría</th>
 							<th>Precio</th>
@@ -40,6 +55,7 @@
 								for (Producto prod : lista) {
 						%>
 						<tr>
+							<td><%= prod.getCodigo() %></td>
 							<td><%= prod.getNombre() %></td>
 							<td><%= prod.getCategoria() %></td>
 							<td><%= prod.getPrecio() %></td>
@@ -48,10 +64,10 @@
 							<td><%= prod.getStockMax() %></td>
 							<td><%= prod.getEstado() %></td>
 							<td>
-								<a href="producto?opcion=editar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil"></i></a>
+								<a href="producto?opcion=detalle&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil"></i></a>
 								<a href="producto?opcion=eliminar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-danger" ><i class="bi bi-trash3"></i></a>
-								<a href="producto?opcion=eliminar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-success" ><i class="bi bi-arrow-left-right"></i></a>
-								<a href="producto?opcion=eliminar&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-info" ><i class="bi bi-card-list"></i></a>
+								<a href="producto?opcion=stock&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-success" ><i class="bi bi-arrow-left-right"></i></a>
+								<a href="producto?opcion=kardex&id=<%= prod.getProductoId() %>" class="btn btn-sm btn-info" ><i class="bi bi-card-list"></i></a>
 							</td>
 						</tr>
 						<% 

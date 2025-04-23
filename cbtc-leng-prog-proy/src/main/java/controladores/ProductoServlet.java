@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import modelos.ProductoModel;
 import entidades.Producto;
@@ -20,6 +21,7 @@ public class ProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private ProductoModel productoModel;
+	private LocalDate fechaRegistro = LocalDate.now();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,7 +40,7 @@ public class ProductoServlet extends HttpServlet {
 		
 		switch (opcion) {
 			case "lista" : this.lista(request, response); break;
-			case "editar" : this.editar(request, response); break;
+			case "detalle" : this.detalle(request, response); break;
 			case "registrar" : this.registrar(request, response); break;
 			default:
 				lista(request, response);
@@ -46,30 +48,51 @@ public class ProductoServlet extends HttpServlet {
 	}
 
 	protected void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Producto> lista = this.productoModel.listar();
+		ArrayList<Producto> lista = null;
+		if (request.getParameter("texto") != null) {
+			lista = this.productoModel.buscar(request.getParameter("texto"));
+		}else {
+			lista = this.productoModel.listar();
+		}
 		request.setAttribute("lista", lista);
 		
-		request.getRequestDispatcher("/producto/producto_lista.jsp").forward(request, response);
+		request.getRequestDispatcher("/producto/listado.jsp").forward(request, response);
 	}
 	
-	protected void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/usuario/usuario_editar.jsp").forward(request, response);
+	protected void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Producto prod = new Producto();
+		if (request.getParameter("id") != null) {
+			int productoId = Integer.parseInt(request.getParameter("id"));
+			prod = this.productoModel.obtener(productoId);
+		}
+		request.setAttribute("info", prod);
+		request.getRequestDispatcher("/producto/detalle.jsp").forward(request, response);
+	
 	}
 	
 	protected void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Producto objProducto = new Producto();
-		objProducto.setNombre(request.getParameter("nombres"));
-		objProducto.setCategoriaId(Integer.parseInt(request.getParameter("apellidos")));
-		objProducto.setPrecio(Double.parseDouble(request.getParameter("dni")));
-		objProducto.setFechaCreacion(request.getParameter("correo"));
+		objProducto.setProductoId(Integer.parseInt(request.getParameter("productoId")));
+		objProducto.setCategoriaId(Integer.parseInt(request.getParameter("categoria")));
+		objProducto.setCodigo(request.getParameter("codigo"));
+		objProducto.setNombre(request.getParameter("nombre"));
+		objProducto.setPrecio(Double.parseDouble(request.getParameter("precio")));
+		objProducto.setFechaCreacion(fechaRegistro.toString());
 		objProducto.setStock(0);
-		objProducto.setStockMin(Integer.parseInt(request.getParameter("intentos")));
-		objProducto.setStockMax(Integer.parseInt(request.getParameter("intentos")));
+		objProducto.setStockMin(Integer.parseInt(request.getParameter("stockMin")));
+		objProducto.setStockMax(Integer.parseInt(request.getParameter("stockMax")));
 		request.setAttribute("usuario", objProducto);
 		
-		int value = this.productoModel.crear(objProducto);
-		
-		response.sendRedirect("usuario");
+		int value = 0;
+		if (objProducto.getProductoId() > 0) {
+			value = this.productoModel.actualizar(objProducto);
+		} else {
+			value = this.productoModel.crear(objProducto);
+		}
+
+		response.sendRedirect("producto");
 	}
 
 }
